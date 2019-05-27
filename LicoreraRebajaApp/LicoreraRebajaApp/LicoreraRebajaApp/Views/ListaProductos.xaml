@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LicoreraRebajaApp.Views.ListaProductos">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Busqueda por Id"></Label>
+                <Entry Text="{Binding IdProducto}"></Entry>
+                <Button Text="Buscar" Command="{Binding BuscarCommand}"></Button>
+                <Label Text="{Binding Nombre}"></Label>
+
+                <ListView x:Name="LvProductos" ItemsSource="{Binding Productos}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Nombre}" Detail="{Binding ValorUnitario}">
+
+                            </TextCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button Text="Crear Producto" Clicked="OnCrearProductoClicked"></Button>
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage> 
