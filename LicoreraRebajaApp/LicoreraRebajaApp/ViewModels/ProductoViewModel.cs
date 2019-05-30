@@ -1,5 +1,6 @@
 ﻿using LicoreraRebajaApp.Models;
 using LicoreraRebajaApp.Services;
+using LicoreraRebajaApp.Services.Rest;
 using LicoreraRebajaApp.Views;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace LicoreraRebajaApp.ViewModels
         ProductoModel producto;
         private ObservableCollection<ProductoModel> productos;
         public ProductoService service = new ProductoService();
+        public ServicioRest serviceRest = new ServicioRest();
 
         //Constructores
         public ProductoViewModel()
@@ -37,6 +39,7 @@ namespace LicoreraRebajaApp.ViewModels
         //Eventos
         public Command GuardarCommand { get; set; }
         public Command BuscarCommand { get; set; }
+        public Command CallRestCommand { get; set; }
 
         //Métodos
         #region Getters y Setters
@@ -68,12 +71,18 @@ namespace LicoreraRebajaApp.ViewModels
             this.Nombre = producto.Nombre;
         }
 
+        private async Task CallRest()
+        {
+            await serviceRest.testCall();
+        }
+
         private async void initialConfiguration()
         {
             List<ProductoModel> productosList = await service.ObtenerTabla();
             productos = new ObservableCollection<ProductoModel>(productosList as List<ProductoModel>);
             GuardarCommand = new Command(async () => await Guardar(), () => true);
             BuscarCommand = new Command(async () => await Buscar(), () => true);
+            CallRestCommand = new Command(async () => await CallRest(), () => true);
         }
     }
 }

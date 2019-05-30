@@ -21,22 +21,19 @@ namespace LicoreraRebajaApp.Services
             Database.EnsureCreated();
         }
         //Métodos
-        #region Getters y Setters
 
-        protected override void OnConfiguring(DbContextOptionsBuilder 
-            optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var dbPath = DependencyService.Get<IBaseDatos>()
-                            .GetDatabasePath();
+            var dbPath = DependencyService.Get<IBaseDatos>().GetDatabasePath();
             optionsBuilder.UseSqlite($"Filename={dbPath}");
         }
-        #endregion
+        
 
-        protected override void OnModelCreating(ModelBuilder 
-            modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProductoModel>()
-                        .HasKey(p => p.IdProducto);
+            //modelBuilder.Entity<ProductoModel>().HasKey(p => p.IdProducto);
+            modelBuilder.ApplyConfiguration(new ProductoConfiguration());
         }
+
     }
 }

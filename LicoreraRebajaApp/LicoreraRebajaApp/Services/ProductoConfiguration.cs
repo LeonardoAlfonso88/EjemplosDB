@@ -12,6 +12,8 @@ namespace LicoreraRebajaApp.Services
         public void Configure(EntityTypeBuilder<ProductoModel> builder)
         {
             builder.HasKey(p => p.IdProducto);
+            builder.Property(n => n.Nombre)
+                   .IsRequired();
         }
     }
 }

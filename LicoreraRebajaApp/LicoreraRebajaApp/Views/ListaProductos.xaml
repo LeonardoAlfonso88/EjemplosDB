@@ -20,6 +20,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
                 <Button Text="Crear Producto" Clicked="OnCrearProductoClicked"></Button>
+                <Button Text="CallRest" Command="{Binding CallRestCommand}"></Button>
 
 
             </StackLayout>
